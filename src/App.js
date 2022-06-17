@@ -1,8 +1,14 @@
 import "./App.css";
 import CatList from "./components/CatList";
 import Cat from "./components/Cat";
+import { useState } from "react";
 
 function App() {
+  const [placeholder, setPlaceholder] = useState("hello"); //not sure what this was about... ??
+
+  const handleAppCLick = () => {
+    setPlaceholder(placeholder + "!");
+  };
   const catData1 = [
     {
       id: 1,
@@ -19,10 +25,10 @@ function App() {
   const catData2 = [
     {
       id: 1,
-      name: "Jeffy",
-      saying: "Meow Meow Meooooww",
+      name: "Cosmo",
+      saying: "Hellooo Meowww ",
       age: 5,
-      color: "tabby",
+      color: "tuxedo",
     },
   ];
 
@@ -31,6 +37,7 @@ function App() {
       <header className="App-header">
         <h1>Otter's Flasky</h1>
       </header>
+      <button onClick={handleAppCLick}>{placeholder}</button>
       <main>
         <CatList catData={catData1}></CatList>
         <CatList catData={catData2}></CatList>
