@@ -20,8 +20,7 @@ function App() {
     { id: 2, name: "Lilly", saying: "croaks", age: 5, color: "tuxdeo" },
     { id: 3, name: "FrogCat", saying: "yipyip", age: 5, color: "organge" },
   ];
-  //     /* <Cat name="Lilly" saying="croaks" age={2} color="tabby"></Cat>
-  // <Cat name="Rich" saying="HELLO THERE!" age="6" color="tuxdeo"></Cat>] */
+
   const catData2 = [
     {
       id: 1,
@@ -32,6 +31,29 @@ function App() {
     },
   ];
 
+  const [cats, setCats] = useState(catData1);
+
+  const setCatAge = (id) => {
+    console.log("inside SetCataAge", id);
+    //create copy of cats
+    const olderCats = [...cats];
+
+    //increase age of cat with id
+    for (let cat of olderCats) {
+      if (cat.id === id) {
+        cat.age += 1;
+      }
+    }
+    //call setCats to update array
+    setCats(olderCats);
+  };
+
+  const deleteCat = (id) => {
+    console.log("delete", id);
+    const newCats = cats.filter((cat) => cat.id !== id);
+    setCats(newCats);
+  };
+
   return (
     <div className="App">
       <header className="App-header">
@@ -39,8 +61,13 @@ function App() {
       </header>
       <button onClick={handleAppCLick}>{placeholder}</button>
       <main>
-        <CatList catData={catData1}></CatList>
-        <CatList catData={catData2}></CatList>
+        {/* adding props to catList.. */}
+        <CatList
+          catData={cats}
+          setCatAgeCallback={setCatAge}
+          deleteCatCallback={deleteCat}
+        ></CatList>
+        {/* <CatList catData={catData2}></CatList> */}
         <Cat></Cat>
       </main>
     </div>

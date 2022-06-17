@@ -6,22 +6,36 @@ import PropTypes from "prop-types";
 // this is called 'destructuring'
 // const CatList = ({catData}) => { }
 const CatList = (props) => {
-  console.log("Here are my props:", props);
-  const catData = props.catData;
-  console.log("Cat data:", catData);
+  // console.log("Here are my props:", props);
+  // const catData = props.catData;
+  // console.log("Cat data:", catData);
 
-  const catComponents = [];
-  for (const cat of catData) {
-    catComponents.push(
-      <Cat
-        key={cat.id}
-        name={cat.name}
-        saying={cat.saying}
-        age={cat.age}
-        color={cat.color}
-      ></Cat>
-    );
-  }
+  const catComponents = props.catData.map((cat) => (
+    <Cat
+      key={cat.id}
+      id={cat.id}
+      name={cat.name}
+      saying={cat.saying}
+      age={cat.age}
+      color={cat.color}
+      setCatCallback={props.setCatAgeCallback}
+      deleteCatCallback={props.deleteCatCallback}
+    ></Cat>
+  ));
+
+  // const catComponents = [];
+  // for (const cat of props.catData) {
+  //   catComponents.push(
+  //     <Cat
+  //       key={cat.id}
+  //       name={cat.name}
+  //       saying={cat.saying}
+  //       age={cat.age}
+  //       color={cat.color}
+  //       setCatCallback={props.setCatAgeCallback}
+  // deleteCatCallback={props.deleteCatCallback}
+  //     ></Cat>
+  //   );
 
   // alternate way to do this:
   // const catComponents = catData.map((cat) => (
@@ -47,6 +61,8 @@ const CatList = (props) => {
 
 CatList.prototype = {
   catData: PropTypes.array.isRequired,
+  setCatAgeCallback: PropTypes.func.isRequired,
+  deleteCatCallback: PropTypes.func.isRequired,
 };
 
 export default CatList;
